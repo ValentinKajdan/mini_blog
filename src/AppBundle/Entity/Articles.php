@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Articles
 {
     /**
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -45,6 +47,13 @@ class Articles
      * @NotBlank()
      */
     private $date;
+    /**
+     * @var int
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    private $categoryId;
     /**
      * Get the value of title
      *
