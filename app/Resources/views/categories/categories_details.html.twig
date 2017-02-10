@@ -3,11 +3,8 @@
 {% block title %}Catégorie {{ category.title }}{% endblock %}
 
 {% block body %}
-  <div>
+  <div class="container">
     {{ category.title }}
-  </div>
-
-  <div>
     Les articles :
     {% for article in articles %}
         <li>

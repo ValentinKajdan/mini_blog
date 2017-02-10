@@ -1,0 +1,26 @@
+body, html, p, a, h1, h2, h3, h4, h5, div, span {margin: 0; padding: 0;}
+body { background: #F5F5F5; font-family: calibri;}
+#menu {
+  height: 70px;
+  line-height: 70px;
+  background-color: #3F51B5;
+  color: #fff;
+  padding: 0 200px;
+}
+#menu a {
+  color: #fff;
+  text-decoration: none;
+}
+#menu h1 {
+  display: inline-block;
+}
+#menu nav {
+  float: right;
+  display: inline-block;
+}
+#menu nav a {
+  width: 100px;
+  text-align: right;
+  display: inline-block;
+}
+.container {padding: 0 200px;margin-top: 30px;}

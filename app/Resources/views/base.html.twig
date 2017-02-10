@@ -3,14 +3,47 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Mini Blog LPDW{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="/app/Resources/public/css/style.css">
         {% block stylesheets %}
-
+          <style>
+              body, html, p, a, h1, h2, h3, h4, h5, div, span {margin: 0; padding: 0;}
+              body { background: #F5F5F5; font-family: calibri;}
+              #menu {
+                height: 70px;
+                line-height: 70px;
+                background-color: #3F51B5;
+                color: #fff;
+                padding: 0 200px;
+              }
+              #menu a {
+                color: #fff;
+                text-decoration: none;
+              }
+              #menu h1 {
+                display: inline-block;
+              }
+              #menu nav {
+                float: right;
+                display: inline-block;
+              }
+              #menu nav a {
+                width: 100px;
+                text-align: right;
+                display: inline-block;
+              }
+              .container {padding: 0 200px;margin-top: 30px;}
+          </style>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-      <a href="/">back home</a>
-        <a href="/categories">categories</a>
+        <div id="menu">
+            <h1><a href="/">Blog</a></h1>
+            <nav>
+              <a href="/categories">Catégories</a>
+              <a href="/categories">Connexion</a>
+            </nav>
+        </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
