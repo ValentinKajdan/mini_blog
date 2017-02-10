@@ -13,9 +13,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Articles')
+            ->findBy([])
+        ;
         return $this->render('/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'articles' => $articles
         ]);
     }
 
@@ -24,11 +29,6 @@ class DefaultController extends Controller
     */
    public function categoriesListAction(Request $request)
    {
-       // $categories = $this
-       //     ->getDoctrine()
-       //     ->getRepository('AppBundle:Category')
-       //     ->findAll()
-       // ;
        $categories = $this
            ->getDoctrine()
            ->getRepository('AppBundle:Category')
@@ -53,6 +53,21 @@ class DefaultController extends Controller
           'category' => $category
         ]);
     }
+
+    /**
+      * @Route("/articles/{id}", name="articles_name")
+      */
+     public function articlesDetailsAction(Request $request, $id)
+     {
+         $article = $this
+             ->getDoctrine()
+             ->getRepository('AppBundle:Articles')
+             ->getById($id)
+         ;
+         return $this->render('articles/articles_details.html.twig', [
+           'article' => $article
+         ]);
+     }
 
 
 }
