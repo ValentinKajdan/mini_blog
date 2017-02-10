@@ -21,4 +21,22 @@ class ArticlesRepository extends EntityRepository
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * Récupère les articles liés à une catégorie
+     *
+     * @param  int $idCat
+     *
+     * @return Article
+     */
+    public function getByIdCat($categoryId)
+    {
+        return $this
+            ->createQueryBuilder('m')
+            ->where('m.categoryId = :categoryId')
+            ->setParameter('categoryId', $categoryId)
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 }

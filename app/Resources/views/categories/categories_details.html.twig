@@ -3,5 +3,19 @@
 {% block title %}Catégorie {{ category.title }}{% endblock %}
 
 {% block body %}
-  {{ category.title }}
+  <div>
+    {{ category.title }}
+  </div>
+
+  <div>
+    Les articles :
+    {% for article in articles %}
+        <li>
+          <a href="{{ path('articles_name', {'id': article.id}) }}">
+            {{ article.title }} par {{ article.author }}
+          </a>
+        </li>
+    {% endfor %}
+  </div>
+
 {% endblock %}

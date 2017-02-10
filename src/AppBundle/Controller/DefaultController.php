@@ -49,8 +49,14 @@ class DefaultController extends Controller
             ->getRepository('AppBundle:Category')
             ->getById($id)
         ;
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Articles')
+            ->getByIdCat($id)
+        ;
         return $this->render('categories/categories_details.html.twig', [
-          'category' => $category
+          'category' => $category,
+          'articles' => $articles
         ]);
     }
 
