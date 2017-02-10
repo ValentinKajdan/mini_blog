@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <h1>Hello</h1>
+    </div>
+
+    <ul>
+    {% for category in categories %}
+        <li>
+          <a href="{{ path('categories_name', {'id': category.id}) }}">
+            {{ category.title }}
+          </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+  body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+  h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+  h1 { font-size: 36px; }
+</style>
+{% endblock %}
