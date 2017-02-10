@@ -4,7 +4,18 @@
     <div class="container">
         <h1>{{ article.title }}</h1>
         <h3>{{ article.author }}</h3>
-        {{ article.content }}
+        {{ article.content }}<br/><br/>
+
+        <span>Commentaires :</span>
+
+          <ul>
+          {% for comment in comments %}
+              <li>
+                  {{ comment.content }} <br/>
+                  Par {{ comment.author }}
+              </li>
+          {% endfor %}
+          </ul>
 
     </div>
 {% endblock %}

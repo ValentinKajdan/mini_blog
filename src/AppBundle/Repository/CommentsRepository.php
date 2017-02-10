@@ -2,7 +2,7 @@
 namespace AppBundle\Repository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
-class ArticlesRepository extends EntityRepository
+class CommentsRepository extends EntityRepository
 {
     /**
      * Récupère un article par son identifiant
@@ -23,18 +23,18 @@ class ArticlesRepository extends EntityRepository
     }
 
     /**
-     * Récupère les articles liés à une catégorie
+     * Récupère les commentaires liés à un article
      *
-     * @param  int $categoryId
+     * @param  int $idArticle
      *
-     * @return Article
+     * @return Comment
      */
-    public function getByIdCat($categoryId)
+    public function getByIdArt($idArticle)
     {
         return $this
             ->createQueryBuilder('m')
-            ->where('m.categoryId = :categoryId')
-            ->setParameter('categoryId', $categoryId)
+            ->where('m.idArticle = :idArticle')
+            ->setParameter('idArticle', $idArticle)
             ->getQuery()
             ->getArrayResult()
         ;

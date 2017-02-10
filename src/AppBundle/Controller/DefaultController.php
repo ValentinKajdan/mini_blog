@@ -70,8 +70,14 @@ class DefaultController extends Controller
              ->getRepository('AppBundle:Articles')
              ->getById($id)
          ;
+         $comments = $this
+             ->getDoctrine()
+             ->getRepository('AppBundle:Comments')
+             ->getByIdArt($id)
+         ;
          return $this->render('articles/articles_details.html.twig', [
-           'article' => $article
+           'article' => $article,
+           'comments' => $comments
          ]);
      }
 
