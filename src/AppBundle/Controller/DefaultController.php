@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Comments;
+use AppBundle\Form\CommentType;
 
 class DefaultController extends Controller
 {
@@ -93,9 +94,31 @@ class DefaultController extends Controller
              ->getRepository('AppBundle:Comments')
              ->getByIdArt($id)
          ;
+
+         $comment = new Comments();
+         $form = $this->createForm(CommentType::class, $comment);
+
+         $form->handleRequest($request);
+
+         if ($form->isSubmitted() && $form->isValid()) {
+             $comment = $form->getData();
+             $comment->setIdArticle($article);
+             echo var_dump($comment);
+             echo var_dump($article);
+
+             $em = $this->getDoctrine()->getManager();
+             $em->persist($comment);
+             $em->flush($comment);
+
+             return $this->redirectToRoute('articles_name', [
+                 'id' => $id
+             ]);
+         }
+
          return $this->render('articles/articles_details.html.twig', [
            'article' => $article,
-           'comments' => $comments
+           'comments' => $comments,
+           'form' => $form->createView()
          ]);
      }
 

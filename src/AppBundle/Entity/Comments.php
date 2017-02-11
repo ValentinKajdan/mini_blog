@@ -21,7 +21,7 @@ class Comments
     /**
      * @var int
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Articles")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Articles", cascade={"persist"})
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $idArticle;
@@ -64,7 +64,7 @@ class Comments
      */
     public function setContent($content)
     {
-        $this->content = $contentn;
+        $this->content = $content;
         return $this;
     }
     /**
@@ -142,13 +142,13 @@ class Comments
     /**
      * Set the value of the Id of the article
      *
-     * @param mixed id
+     * @param int article
      *
      * @return self
      */
-    public function setIdArticle($id)
+    public function setIdArticle($article)
     {
-        $this->idArticle = $id;
+        $this->idArticle = $article;
         return $this;
     }
 }

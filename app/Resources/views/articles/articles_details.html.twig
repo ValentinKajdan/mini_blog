@@ -17,5 +17,11 @@
           {% endfor %}
           </ul>
 
+          <span>Postez votre commentaire</span>
+
+          {{ form_start(form) }}
+          {{ form_widget(form) }}
+          {{ form_end(form) }}
+
     </div>
 {% endblock %}
