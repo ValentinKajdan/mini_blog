@@ -23,6 +23,22 @@ class ArticlesRepository extends EntityRepository
     }
 
     /**
+     * Récupère les 5 derniers articles
+     *
+     * @return Article
+     */
+    public function getLastFive()
+    {
+        return $this
+            ->createQueryBuilder('m')
+            ->orderBy('m.id', 'DESC')
+            ->setMaxResults(5)
+            ->getQuery()
+            ->getResult()
+      ;
+    }
+
+    /**
      * Récupère les articles liés à une catégorie
      *
      * @param  int $categoryId

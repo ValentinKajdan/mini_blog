@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\Services;
 use Doctrine\ORM\EntityManager;
-class CommentsCounterService
+class CommentsCountService
 {
     /**
      * @var EntityManager
@@ -12,29 +12,16 @@ class CommentsCounterService
         $this->doctrine = $doctrine;
     }
     /**
-     * Retourne le nombre total de notes sur un menu
-     * @param  int $menuId Identifiant du menu
+     * Retourne le nombre total de commentaires sur un article
+     * @param  int $idArt Id de l'article
      * @return int
      */
-    public function getTotalMenuLike($menuId)
+    public function getTotalComments($idArt)
     {
         return $this
             ->doctrine
-            ->getRepository('AppBundle:MenuLike')
-            ->getCountMenuLike($menuId)
-        ;
-    }
-    /**
-     * Retourne la moyenne des notes sur un menu
-     * @param  int $menuId Identifiant du menu
-     * @return int
-     */
-    public function getAvgMenuLike($menuId)
-    {
-        return $this
-            ->doctrine
-            ->getRepository('AppBundle:MenuLike')
-            ->getAvgMenuLike($menuId)
+            ->getRepository('AppBundle:Comments')
+            ->getCountTotalComments($idArt)
         ;
     }
 }

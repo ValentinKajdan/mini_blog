@@ -39,4 +39,22 @@ class CommentsRepository extends EntityRepository
             ->getArrayResult()
         ;
     }
+    /**
+     * Retourne le total de commentaires d'un article
+     *
+     * @param  int $idArt Id de l'article
+     *
+     * @return int
+     */
+      public function getCountTotalComments($idArt)
+      {
+          return $this
+              ->createQueryBuilder('ml')
+              ->select('count(ml)')
+              ->where('ml.id = :id')
+              ->setParameter('id', $idArt)
+              ->getQuery()
+              ->getSingleScalarResult()
+          ;
+      }
 }

@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use AppBundle\Entity\Comments;
 
 class DefaultController extends Controller
 {
@@ -16,7 +18,7 @@ class DefaultController extends Controller
         $articles = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Articles')
-            ->findBy([])
+            ->getLastFive()
         ;
         return $this->render('/home.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
@@ -61,8 +63,24 @@ class DefaultController extends Controller
     }
 
     /**
-      * @Route("/articles/{id}", name="articles_name")
-      */
+     * @Route("/articles", name="articles_list")
+     */
+    public function articlesAction(Request $request)
+    {
+        $articles = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Articles')
+            ->findBy([])
+        ;
+        return $this->render('articles/articles_list.html.twig', [
+            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'articles' => $articles
+        ]);
+    }
+
+  /**
+    * @Route("/articles/{id}", name="articles_name")
+    */
      public function articlesDetailsAction(Request $request, $id)
      {
          $article = $this

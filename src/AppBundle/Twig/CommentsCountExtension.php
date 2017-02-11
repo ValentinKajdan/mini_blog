@@ -4,35 +4,27 @@ use AppBundle\Services\CommentsCountService;
 class CommentsCountExtension extends \Twig_Extension
 {
     /**
-     * @var MenuLikeService
+     * @var CommentsCountService
      */
-    private $menuLikeService;
+    private $CommentsCountService;
     /**
-     * @param MenuLikeService $menuLikeService
+     * @param CommentsCountService $CommentsCountService
      */
-    public function __construct(MenuLikeService $menuLikeService)
+    public function __construct(CommentsCountService $CommentsCountService)
     {
-        $this->menuLikeService = $menuLikeService;
+        $this->CommentsCountService = $CommentsCountService;
     }
     public function getFunctions()
     {
         return [
             new \Twig_SimpleFunction(
-                'get_total_menu_like',
-                [$this, 'getTotalMenuLike']
-            ),
-            new \Twig_SimpleFunction(
-                'get_average_menu_like',
-                [$this, 'getAvgMenuLike']
+                'get_total_comments',
+                [$this, 'getTotalComments']
             )
         ];
     }
-    public function getTotalMenuLike($menuId)
+    public function getTotalComments($idArt)
     {
-        return $this->menuLikeService->getTotalMenuLike($menuId);
-    }
-    public function getAvgMenuLike($menuId)
-    {
-        return $this->menuLikeService->getAvgMenuLike($menuId);
+        return $this->CommentsCountService->getTotalComments($idArt);
     }
 }
