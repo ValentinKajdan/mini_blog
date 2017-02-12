@@ -102,13 +102,12 @@ class DefaultController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $comment = $form->getData();
-             $comment->setIdArticle($article);
-             echo var_dump($comment);
-             echo var_dump($article);
+             $comment->setIdArticle($id);
+             $comment->setId(1);
 
              $em = $this->getDoctrine()->getManager();
              $em->persist($comment);
-             $em->flush($comment);
+             $em->flush();
 
              return $this->redirectToRoute('articles_name', [
                  'id' => $id

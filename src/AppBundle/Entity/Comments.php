@@ -21,8 +21,7 @@ class Comments
     /**
      * @var int
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Articles", cascade={"persist"})
-     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
+     * @ORM\Column(name="article_id", type="integer")
      */
     private $idArticle;
     /**
@@ -30,6 +29,7 @@ class Comments
      *
      * @ORM\Column(name="author", type="string")
      * @Length(max="72")
+     * @NotBlank(message="L'auteur est vide !")
      */
     private $author;
     /**
@@ -43,7 +43,7 @@ class Comments
      * @Assert\Date()
      *
      * @ORM\Column(name="date", type="date")
-     * @NotBlank()
+     * @NotBlank(message="La date est vide !")
      */
     private $date;
     /**
