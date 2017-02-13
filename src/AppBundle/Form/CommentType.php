@@ -21,7 +21,8 @@ class CommentType extends AbstractType
             // Obligatoire
             ->add('content', TextareaType::class, [
                 'required' => false,
-                'label' => 'Votre commentaire'
+                'label' => 'Votre commentaire',
+                'attr' => ['class' => 'materialize-textarea']
             ])
             ->add('submit', SubmitType::class)
         ;
