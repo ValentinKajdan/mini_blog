@@ -8,7 +8,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Intl;
 use AppBundle\Entity\Comments;
+use AppBundle\Entity\Articles;
+use AppBundle\Entity\Category;
 use AppBundle\Form\CommentType;
+use AppBundle\Form\ArticleType;
 
 class DefaultController extends Controller
 {
@@ -124,6 +127,40 @@ class DefaultController extends Controller
            'form' => $form->createView()
          ]);
      }
+
+     /**
+       * @Route("/article/new", name="articles_new")
+       */
+        public function newArticlesDetailsAction(Request $request)
+        {
+            $categories = $this
+                ->getDoctrine()
+                ->getRepository('AppBundle:Category')
+                ->findBy([])
+            ;
+
+            $article =  new Articles();
+
+            $form = $this->createForm(ArticleType::class, $article);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $article = $form->getData();
+                $article->setDate();
+                $article->setIdCat($cat);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($article);
+                $em->flush($article);
+
+                return $this->redirectToRoute('articles_list');
+            }
+
+            return $this->render('articles/articles_new.html.twig', [
+              'form' => $form->createView()
+            ]);
+        }
 
 
 }

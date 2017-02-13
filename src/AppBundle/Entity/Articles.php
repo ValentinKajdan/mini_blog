@@ -31,6 +31,7 @@ class Articles
      *
      * @ORM\Column(name="author", type="string")
      * @Length(max="72")
+     * @NotBlank(message="L'auteur ne doit pas être vide")
      */
     private $author;
     /**
@@ -44,7 +45,6 @@ class Articles
      * @Assert\Date()
      *
      * @ORM\Column(name="date", type="date")
-     * @NotBlank()
      */
     private $date;
     /**
@@ -93,7 +93,7 @@ class Articles
      */
     public function setContent($content)
     {
-        $this->content = $contentn;
+        $this->content = $content;
         return $this;
     }
     /**
@@ -112,11 +112,11 @@ class Articles
      *
      * @return self
      */
-    public function setDate($date)
-    {
-        $this->date = $date;
-        return $this;
-    }
+     public function setDate()
+     {
+         $this->date = new \Datetime();
+         return $this;
+     }
     /**
      * Get the value of author
      *
@@ -157,6 +157,27 @@ class Articles
     public function setId($id)
     {
         $this->id = $id;
+        return $this;
+    }
+    /**
+     * Get the value of Id Catégorie
+     *
+     * @return mixed
+     */
+    public function getCategoryId()
+    {
+        return $this->categoryId;
+    }
+    /**
+     * Set the value of Id Catégorie
+     *
+     * @param mixed id
+     *
+     * @return self
+     */
+    public function setCategoryId($categoryId)
+    {
+        $this->categoryId = $categoryId;
         return $this;
     }
 }
