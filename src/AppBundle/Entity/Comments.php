@@ -4,6 +4,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Date;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentsRepository")
  * @ORM\Table(name="comments")
@@ -21,7 +22,8 @@ class Comments
     /**
      * @var int
      *
-     * @ORM\Column(name="article_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Articles")
+     * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     private $idArticle;
     /**
@@ -43,7 +45,6 @@ class Comments
      * @Assert\Date()
      *
      * @ORM\Column(name="date", type="date")
-     * @NotBlank(message="La date est vide !")
      */
     private $date;
     /**
@@ -83,9 +84,9 @@ class Comments
      *
      * @return self
      */
-    public function setDate($date)
+    public function setDate()
     {
-        $this->date = $date;
+        $this->date = new \Datetime();
         return $this;
     }
     /**

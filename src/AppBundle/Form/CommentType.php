@@ -23,10 +23,6 @@ class CommentType extends AbstractType
                 'required' => false,
                 'label' => 'Votre commentaire'
             ])
-            // Caché
-            ->add('date', HiddenType::class, [
-                'data' => date("Y-m-d")
-            ])
             ->add('submit', SubmitType::class)
         ;
     }

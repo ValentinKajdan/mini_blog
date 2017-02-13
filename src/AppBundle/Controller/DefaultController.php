@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Intl\Intl;
 use AppBundle\Entity\Comments;
 use AppBundle\Form\CommentType;
 
@@ -102,12 +103,15 @@ class DefaultController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $comment = $form->getData();
-             $comment->setIdArticle($id);
-             $comment->setId(1);
+             $comment->setIdArticle($article);
+             $comment->setDate();
+            //  $comment->setId(1);
+
+            // dump($comment);
 
              $em = $this->getDoctrine()->getManager();
              $em->persist($comment);
-             $em->flush();
+             $em->flush($comment);
 
              return $this->redirectToRoute('articles_name', [
                  'id' => $id
