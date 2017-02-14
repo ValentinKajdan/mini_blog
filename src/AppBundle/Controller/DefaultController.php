@@ -148,7 +148,7 @@ class DefaultController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $article = $form->getData();
                 $article->setDate();
-                $article->setIdCat($cat);
+                $article->setCategoryId($categories[0]);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);
