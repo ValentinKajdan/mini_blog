@@ -12,6 +12,7 @@ use AppBundle\Entity\Articles;
 use AppBundle\Entity\Category;
 use AppBundle\Form\CommentType;
 use AppBundle\Form\ArticleType;
+use AppBundle\Form\CategoryType;
 
 class DefaultController extends Controller
 {
@@ -131,7 +132,7 @@ class DefaultController extends Controller
      /**
        * @Route("/article/new", name="articles_new")
        */
-        public function newArticlesDetailsAction(Request $request)
+        public function newArticleAction(Request $request)
         {
             $categories = $this
                 ->getDoctrine()
@@ -161,6 +162,32 @@ class DefaultController extends Controller
               'form' => $form->createView()
             ]);
         }
+
+      /**
+        * @Route("/category/new", name="category_new")
+        */
+         public function newCategoryAction(Request $request)
+         {
+             $category = new Category();
+
+             $form = $this->createForm(CategoryType::class, $category);
+
+             $form->handleRequest($request);
+
+             if ($form->isSubmitted() && $form->isValid()) {
+                 $category = $form->getData();
+
+                 $em = $this->getDoctrine()->getManager();
+                 $em->persist($category);
+                 $em->flush($category);
+
+                 return $this->redirectToRoute('categories_list');
+             }
+
+             return $this->render('categories/category_new.html.twig', [
+               'form' => $form->createView()
+             ]);
+         }
 
 
 }
