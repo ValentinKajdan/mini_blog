@@ -7,19 +7,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-        // $categories = $this
-        //     ->getDoctrine()
-        //     ->getRepository('AppBundle:Category')
-        //     ->findBy([])
-        // ;
-        // dump($categories) ;
 
         $builder
           // Obligatoire; longueur max : 200 chars;
@@ -38,17 +32,17 @@ class ArticleType extends AbstractType
                 'label' => 'Contenu de l\'article',
                 'attr' => ['class' => 'materialize-textarea']
             ])
-            ->add('category_id', ChoiceType::class, [
-              'choices' => [
-                '0 étoile' => 0,
-                '1 étoile' => 1,
-                '2 étoiles' => 2,
-                '3 étoiles' => 3,
-              ],
+            ->add('category_id',EntityType::class, [
+              'class' => 'AppBundle:Category',
               'label' => 'Catégorie',
-              'attr' => ['style' => 'display: block;']
+              'choice_label' => 'title',
+              'attr' => ['style' => 'display: block;'],
+              'multiple' => false])
+
+            ->add('submit', SubmitType::class, [
+              'label' => 'Créer',
+              'attr' => ['class' => 'waves-effect waves-light btn indigo darken-3']
             ])
-            ->add('submit', SubmitType::class)
         ;
     }
 }

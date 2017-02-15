@@ -17,7 +17,10 @@ class CategoryType extends AbstractType
                 'required' => false,
                 'label' => 'Titre de la catégorie'
             ])
-            ->add('submit', SubmitType::class)
+            ->add('submit', SubmitType::class, [
+              'label' => 'Créer',
+              'attr' => ['class' => 'waves-effect waves-light btn indigo darken-3']
+            ])
         ;
     }
 }

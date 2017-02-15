@@ -99,6 +99,9 @@ class DefaultController extends Controller
              ->getRepository('AppBundle:Comments')
              ->getByIdArt($id)
          ;
+         $content = $article->getContent();
+         $content = html_entity_decode($content);
+         $article->setContent($content);
 
          $comment = new Comments();
          $form = $this->createForm(CommentType::class, $comment);
@@ -134,12 +137,6 @@ class DefaultController extends Controller
        */
         public function newArticleAction(Request $request)
         {
-            $categories = $this
-                ->getDoctrine()
-                ->getRepository('AppBundle:Category')
-                ->findBy([])
-            ;
-
             $article =  new Articles();
 
             $form = $this->createForm(ArticleType::class, $article);
@@ -149,7 +146,6 @@ class DefaultController extends Controller
             if ($form->isSubmitted() && $form->isValid()) {
                 $article = $form->getData();
                 $article->setDate();
-                $article->setCategoryId($categories[0]);
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($article);

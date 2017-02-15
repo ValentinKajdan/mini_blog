@@ -4,6 +4,8 @@ Mini Blog de Valentin Kajdan pour la LPDW
 
 ## Fonctionnalités
 
+Il faut au préalable créer un compte dans la base de données à la main (le rôle n'a pas d'importance).
+
 ## Contenu
 
 Un utilisateur non connecté (anonyme) peut visualiser tout le contenu du blog (catégories et articles) et poster des commentaires
@@ -39,9 +41,9 @@ Les fonctionnalités suivantes sont mises en place :
   - Affichage et création de commentaire
   - Sécurité
   - Utilisation de formulaires Symfony (stylé avec materializecss)
+  - L'utilisation d'un service pour compter le nombre de commentaires (j'ai créé le service et la fonction Twig mais je n'arrive pas à l'appeler)
 
 Les fonctionnalités suivantes sont manquantes :
-  - Présence et gestion des tags
+  - Présence et gestion des tags (Entity et mise en place faite mais pas d'affichage)
   - Suppression et modification de contenu (catégorie & articles)
   - Pagination sur la page qui liste les articles
-  - L'utilisation d'un service pour compter le nombre de commentaires (j'ai créé le service et la fonction Twig mais je n'arrive pas à l'appeler)
