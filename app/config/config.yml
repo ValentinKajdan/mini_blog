@@ -70,6 +70,11 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
 # services
 # services:
 #     twig.extension.text:

@@ -2,47 +2,39 @@
 # http://symfony.com/doc/current/security.html
 security:
 
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-    providers:
-        in_memory:
-            memory:
-                users:
-                    admin:
-                        password: admin
-                        roles: 'ROLE_ADMIN'
+    encoders:
+        AppBundle\Entity\User: plaintext
 
-        bdd_provider:
+    providers:
+        database_users:
             entity:
                 class: AppBundle:User
                 property: email
 
-    encoders:
-        AppBundle\Entity\User: plaintext
-
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
-        dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
-            security: false
+        secured_area:
 
-        acl:
-            anonymous: ~
-            # http_basic: ~
-            provider: bdd_provider
+            pattern: ^/
+
+            anonymous: true
+
             form_login:
-                login_path: menu_login # affiche le form
-                check_path: menu_check # vérification des
-                  # identifiants fournis
-                default_target_path: newmenu # Chemin de redirection
                 username_parameter: _email
 
-        pattern:
-            # Première méthode (exemple pattern)
-            pattern: /newmenu
-            anonymous: false
-            http_basic: ~
-            provider: in_memory
+                login_path: login
 
+                check_path: login
+
+                csrf_token_generator: security.csrf.token_manager
+
+                default_target_path: index_admin
+
+            logout:
+                path: logout
+
+                target: homepage
 
     access_control:
-        - { path: /newmenu, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: /admin, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: /article/new, roles: IS_AUTHENTICATED_REMEMBERED }
+        - { path: /category/new, roles: IS_AUTHENTICATED_REMEMBERED }

@@ -22,7 +22,7 @@ class UserType extends AbstractType
                 'required' => false,
                 'label' => 'Mot de passe'
             ])
-            ->add('Connexion', SubmitType::class)
+            ->add('connexion', SubmitType::class)
         ;
     }
 }

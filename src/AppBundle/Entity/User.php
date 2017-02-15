@@ -100,6 +100,17 @@ class User implements UserInterface
         $this->password = $password;
         return $this;
     }
+
+    /**
+     * Get the value of Password
+     *
+     * @return string
+     */
+    public function getPlainPassword()
+    {
+        return $this->password;
+    }
+
     /**
      * Get the value of Role
      *
@@ -146,5 +157,29 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->password,
+            $this->email,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+   /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 }
