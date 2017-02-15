@@ -55,6 +55,14 @@ class Articles
      */
     private $categoryId;
     /**
+     * @var int
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Tags", cascade={"persist"})
+     *
+     * @ORM\JoinTable(name="linked_tag")
+     */
+    private $idTags;
+    /**
      * Get the value of title
      *
      * @return string

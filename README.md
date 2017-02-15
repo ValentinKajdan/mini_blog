@@ -43,4 +43,5 @@ Les fonctionnalités suivantes sont mises en place :
 Les fonctionnalités suivantes sont manquantes :
   - Présence et gestion des tags
   - Suppression et modification de contenu (catégorie & articles)
+  - Pagination sur la page qui liste les articles
   - L'utilisation d'un service pour compter le nombre de commentaires (j'ai créé le service et la fonction Twig mais je n'arrive pas à l'appeler)
