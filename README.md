@@ -33,17 +33,18 @@ paths :
 
 Ces pages sont inaccessibles en étant présent en anonyme
 
-### Réalisation
+### Objectifs
 
 Les fonctionnalités suivantes sont mises en place :
   - Création d'article
   - Création de catégorie
   - Affichage et création de commentaire
   - Sécurité
+  - Requêtes DQL
   - Utilisation de formulaires Symfony (stylé avec materializecss)
   - L'utilisation d'un service pour compter le nombre de commentaires (j'ai créé le service et la fonction Twig mais je n'arrive pas à l'appeler)
 
 Les fonctionnalités suivantes sont manquantes :
-  - Présence et gestion des tags (Entity et mise en place faite mais pas d'affichage)
+  - Présence et gestion des tags (Entity et mise en place faite mais pas d'affichage) et recherche
   - Suppression et modification de contenu (catégorie & articles)
   - Pagination sur la page qui liste les articles
