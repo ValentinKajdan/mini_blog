@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+      <h1>Panel Admin</h1>
+
+      <a href="{{ path('articles_new') }}">Nouvel article</a>
+      <a href="{{ path('category_new') }}">Nouvelle catégorie</a>
+    </div>
+{% endblock %}
